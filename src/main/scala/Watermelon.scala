@@ -1,16 +1,13 @@
 import scala.io.StdIn._
 
 object Watermelon {
-  def divide(input: Int) : String = {
-    if (input % 2 == 0 && input > 2) {
-      "YES"
-    }
-    else {
-      "NO"
-    }
+  def divide(input: Int) : Boolean = {
+    if (input % 2 == 0 && input > 2) true
+    else false
   }
 
   def main(args: Array[String]): Unit ={
-    println(divide(readInt()))
+    if(divide(readInt())) println("YES")
+    else println("NO")
   }
 }
