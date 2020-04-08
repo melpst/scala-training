@@ -1,10 +1,5 @@
 import scala.collection.mutable.ArrayBuffer
 
-trait QueueGeneric {
-  def put(str: String): ArrayBuffer[String]
-  def get(): Option[String]
-}
-
 class Queue extends QueueGeneric {
   private var arr = ArrayBuffer.empty[String]
 
