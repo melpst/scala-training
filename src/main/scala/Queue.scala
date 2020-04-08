@@ -1,19 +1,25 @@
+import scala.collection.mutable.ArrayBuffer
+
 trait QueueGeneric {
-  def put(str: String): Array[String]
-  def get(): String
+  def put(str: String): ArrayBuffer[String]
+  def get(): Option[String]
 }
 
 class Queue extends QueueGeneric {
-  var arr: Array[String] = Array()
+  private var arr = ArrayBuffer.empty[String]
 
-  def put(str: String): Array[String] = {
-    arr = arr.appended(str)
-    arr
+  def isEmpty(): Boolean = arr.isEmpty
+
+  def sameElements(array: ArrayBuffer[String]): Boolean = arr.sameElements(array)
+
+  def put(str: String): ArrayBuffer[String] = {
+    arr.addOne(str)
   }
 
-  def get(): String = {
-    val head = arr.head
-    arr = arr.drop(1)
-    head
+  def get(): Option[String] = {
+    if(!arr.isEmpty) {
+      Some(arr.remove(0))
+    }
+    else None
   }
 }
