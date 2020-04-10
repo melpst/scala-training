@@ -1,4 +1,4 @@
-object DoubleComparator extends App {
+object DoubleComparator {
 
   implicit class Comparator(x:Double) {
     def ~=(y: Double)(implicit diff: Double = 0.5): Boolean = {
