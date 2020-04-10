@@ -1,28 +1,16 @@
 object StringMethods {
 
-  def toLowerCase(str: String): Array[String]= str.split(" ").map(s => s.toList.map(c => c.toLower).mkString(""))
+  def toLower(str: String): Array[String] = str.toLowerCase.split(" ")
 
-  def longestWord(str: String): String = toLowerCase(str).maxBy(s => s.length)
+  def longestWord(str: String): String = toLower(str).maxBy(s => s.length)
 
-  def mostCommonWord(str: String): String = toLowerCase(str).maxBy(s => toLowerCase(str).count(a => a.equals(s)))
+  def mostCommonWord(str: String): String = toLower(str).maxBy(s => toLower(str).count(a => a.equals(s)))
 
-  def mostCommonLetter(str: String): Char = toLowerCase(str).map(s => s.toList).flatten
-                                                            .maxBy(c => toLowerCase(str).map(s => s.toList).flatten.count(l => l.equals(c)))
+  def mostCommonLetter(str: String): Char =
+    toLower(str).map(s => s.toList).flatten
+    .maxBy(c => toLower(str).map(s => s.toList).flatten.count(l => l.equals(c)))
 
-  def mapCharToWords(str: String) : scala.collection.mutable.Map[Char,Set[String]] = {
-    val map = scala.collection.mutable.Map[Char, Set[String]]()
-
-    toLowerCase(str).map(s => s.toList.map(c => (c, s))).flatten
-      .sortBy(a => a._1.toInt)
-      .map(a => {
-        if(!map.contains(a._1)){
-          map += (a._1 -> Set[String](a._2))
-        }
-        else{
-          map(a._1) += a._2
-        }
-      })
-    map
-  }
-
+  def mapCharToWords(str: String): Map[Char, Array[String]] =
+    toLower(str).map(s => s.toList.map(c => (c, s))).flatten.groupBy(t => t._1)
+    .transform((k, v) => v.map(x => x._2).distinct)
 }

@@ -7,41 +7,41 @@ class StringMethodsTest extends FunSuite{
   val longestDupWord = "hello"
   val mostDupWord = "hello"
   val mostDupLetter = 'l'
-  val dupMap = scala.collection.mutable.Map[Char, Set[String]]()
+  val dupMap = scala.collection.mutable.Map[Char, Array[String]]()
 
-  dupMap += ('h' -> Set[String]("hello"))
-  dupMap += ('e' -> Set[String]("hello"))
-  dupMap += ('l' -> Set[String]("hello", "world"))
-  dupMap += ('o' -> Set[String]("hello", "world", "oo"))
-  dupMap += ('w' -> Set[String]("world"))
-  dupMap += ('r' -> Set[String]("world"))
-  dupMap += ('d' -> Set[String]("world"))
+  dupMap += ('h' -> Array[String]("hello"))
+  dupMap += ('e' -> Array[String]("hello"))
+  dupMap += ('l' -> Array[String]("hello", "world"))
+  dupMap += ('o' -> Array[String]("hello", "world", "oo"))
+  dupMap += ('w' -> Array[String]("world"))
+  dupMap += ('r' -> Array[String]("world"))
+  dupMap += ('d' -> Array[String]("world"))
 
   val str = "Given an string containing words separated by space find an following condition"
 
   val LongestWord = "containing" //10 chars
   val mostCommonWord = "an" //2 freq
   val mostCommonLetter = 'n' //11 freq
-  val map = scala.collection.mutable.Map[Char, Set[String]]()
+  val map = scala.collection.mutable.Map[Char, Array[String]]()
 
-  map += ('a' -> Set[String]("an", "containing", "separated", "space"))
-  map += ('b' -> Set[String]("by"))
-  map += ('c' -> Set[String]("containing", "space", "condition"))
-  map += ('d' -> Set[String]("words", "separated", "find", "condition"))
-  map += ('e' -> Set[String]("given", "separated", "space"))
-  map += ('f' -> Set[String]("find", "following"))
-  map += ('g' -> Set[String]("given", "string", "containing", "following"))
-  map += ('i' -> Set[String]("find", "given", "string", "following", "condition", "containing"))
-  map += ('l' -> Set[String]("following"))
-  map += ('n' -> Set[String]("find", "given", "string", "following", "condition", "an", "containing"))
-  map += ('o' -> Set[String]("containing", "words", "following", "condition"))
-  map += ('p' -> Set[String]("separated", "space"))
-  map += ('r' -> Set[String]("string", "words", "separated"))
-  map += ('s' -> Set[String]("string", "words", "separated", "space"))
-  map += ('t' -> Set[String]("string", "containing", "separated", "condition"))
-  map += ('v' -> Set[String]("given"))
-  map += ('w' -> Set[String]("words", "following"))
-  map += ('y' -> Set[String]("by"))
+  map += ('a' -> Array[String]("an", "containing", "separated", "space"))
+  map += ('b' -> Array[String]("by"))
+  map += ('c' -> Array[String]("containing", "space", "condition"))
+  map += ('d' -> Array[String]("words", "separated", "find", "condition"))
+  map += ('e' -> Array[String]("given", "separated", "space"))
+  map += ('f' -> Array[String]("find", "following"))
+  map += ('g' -> Array[String]("given", "string", "containing", "following"))
+  map += ('i' -> Array[String]("find", "given", "string", "following", "condition", "containing"))
+  map += ('l' -> Array[String]("following"))
+  map += ('n' -> Array[String]("find", "given", "string", "following", "condition", "an", "containing"))
+  map += ('o' -> Array[String]("containing", "words", "following", "condition"))
+  map += ('p' -> Array[String]("separated", "space"))
+  map += ('r' -> Array[String]("string", "words", "separated"))
+  map += ('s' -> Array[String]("string", "words", "separated", "space"))
+  map += ('t' -> Array[String]("string", "containing", "separated", "condition"))
+  map += ('v' -> Array[String]("given"))
+  map += ('w' -> Array[String]("words", "following"))
+  map += ('y' -> Array[String]("by"))
 
   test("mostLongestWord(str) will return Longest Word"){
     assert(StringMethods.longestWord(str)===LongestWord)
@@ -58,7 +58,7 @@ class StringMethodsTest extends FunSuite{
   test("mapCharToWords(str) will return map"){
     val result = StringMethods.mapCharToWords(str)
 
-    assert(result.forall(a => map.contains(a._1) && map(a._1)==(a._2)) ===true)
+    assert(result.forall(a => map.contains(a._1) && map(a._1).sorted.sameElements(a._2.sorted)) ===true)
   }
 
   test("mostLongestWord(dupWords) will return longestDupWord"){
@@ -76,6 +76,6 @@ class StringMethodsTest extends FunSuite{
   test("mapCharToWords(dupWords) will return map"){
     val result = StringMethods.mapCharToWords(dupWords)
 
-    assert(result.forall(a => dupMap.contains(a._1) && dupMap(a._1)==(a._2)) ===true)
+    assert(result.forall(a => dupMap.contains(a._1) && dupMap(a._1).sorted.sameElements(a._2.sorted)) ===true)
   }
 }
