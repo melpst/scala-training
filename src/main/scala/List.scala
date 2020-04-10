@@ -1,7 +1,5 @@
-object List{
+object List {
 
-  def listOfStringToChar(arr: Array[String]) : Array[String] = {
-    val strArr = arr.map(s => s.split(""))
-    strArr.flatten
-  }
+  def listOfStringToChar(arr: Array[String]) : Set[Char] = arr.map(s => s.toList).flatten.toSet
+
 }
