@@ -59,9 +59,9 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
     else right.asInstanceOf[NonEmptySet].findMax
 
 
-  def union(x: IntSet): IntSet =
-    if(x.isEmpty) this
-    else {
+  def union(x: IntSet): IntSet = x match {
+    case _: EmptySet => this
+    case x: NonEmptySet => {
       val nonEmptySet = x.asInstanceOf[NonEmptySet]
       val incl = this.incl(nonEmptySet.getElem)
 
@@ -70,11 +70,12 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
       else if (nonEmptySet.getRight.isEmpty) incl.union(nonEmptySet.getLeft)
       else incl.union(nonEmptySet.getLeft).union(nonEmptySet.getRight)
     }
+  }
 
-  def intersect(x: IntSet): IntSet =
-    if(x.isEmpty) new EmptySet
-    else {
-      if(x.contains(elem)) new NonEmptySet(elem, left.intersect(x), right.intersect(x))
+  def intersect(x: IntSet): IntSet = x match {
+    case x : EmptySet => x
+    case x : NonEmptySet =>
+      if (x.contains(elem)) new NonEmptySet(elem, left.intersect(x), right.intersect(x))
       else (new EmptySet).union(left.intersect(x)).union(right.intersect(x))
     }
 
