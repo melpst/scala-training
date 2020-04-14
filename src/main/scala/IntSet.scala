@@ -31,7 +31,7 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
     else if (x > elem) new NonEmptySet(elem, left, right incl x)
     else this
 
-  def isEmpty: Boolean = this.elem==0 && left.isEmpty && right.isEmpty
+  def isEmpty: Boolean = false
 
   def excl(x: Int): IntSet =
     if(!this.contains(x)) this
@@ -61,8 +61,7 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
 
   def union(x: IntSet): IntSet = x match {
     case _: EmptySet => this
-    case x: NonEmptySet => {
-      val nonEmptySet = x.asInstanceOf[NonEmptySet]
+    case nonEmptySet: NonEmptySet => {
       val incl = this.incl(nonEmptySet.getElem)
 
       if (nonEmptySet.getLeft.isEmpty && nonEmptySet.getRight.isEmpty) incl
@@ -84,4 +83,15 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
     print(elem+" ")
     right.toString
   }
+}
+
+object IntSet extends App {
+  def apply(ints: Int*) = {
+    var s: IntSet = new EmptySet()
+    for (i <- ints) s = s incl i
+    s
+  }
+
+//  println(IntSet(1, 2, 3).union(IntSet(2, 1, 3)))
+  println(new EmptySet().incl(1).incl(2).incl(3).union(new EmptySet().incl(2).incl(1).incl(3)) )
 }
