@@ -5,9 +5,7 @@ lazy val commonSettings = Seq(
 )
 
 val baseDependencies = Seq(
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
-  "org.scalatest" % "scalatest_2.13" % "3.1.1" % "test",
-  "ch.qos.logback" % "logback-classic" % "1.2.3" % "Test",
+  "org.scalatest" % "scalatest" % "3.1.1" % "test",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
 )
 
