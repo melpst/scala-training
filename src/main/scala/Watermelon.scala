@@ -6,8 +6,8 @@ object Watermelon {
     else false
   }
 
-  def main(args: Array[String]): Unit ={
-    if(divide(readInt())) println("YES")
-    else println("NO")
-  }
+//  def main(args: Array[String]): Unit ={
+//    if(divide(readInt())) println("YES")
+//    else println("NO")
+//  }
 }

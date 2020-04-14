@@ -85,7 +85,7 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
   }
 }
 
-object IntSet extends App {
+object IntSet {
   def apply(ints: Int*) = {
     var s: IntSet = new EmptySet()
     for (i <- ints) s = s incl i
@@ -93,5 +93,5 @@ object IntSet extends App {
   }
 
 //  println(IntSet(1, 2, 3).union(IntSet(2, 1, 3)))
-  println(new EmptySet().incl(1).incl(2).incl(3).union(new EmptySet().incl(2).incl(1).incl(3)) )
+//  println(new EmptySet().incl(1).incl(2).incl(3).union(new EmptySet().incl(2).incl(1).incl(3)) )
 }
