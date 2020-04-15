@@ -5,8 +5,10 @@ class SquareVector[T](v: Vector[T])(implicit n: Numeric[T]) {
   lazy val y = this.sumSquare
   lazy val z = this.rootSum
 
-  private def squareAll: Vector[Double] = v.map(x => n.toDouble(x)*n.toDouble(x))
-  private def sumSquare: Double = x.reduce((a,b) => a+b)
-  private def rootSum: Double = sqrt(y)
+  private def squareAll: Vector[T] = v.map(x => n.times(x,x))
+  private def sumSquare: Option[T] =
+    if(x.isEmpty) None else Some(x.reduce((a,b) => n.plus(a,b)))
+  private def rootSum: Option[Double] =
+    if(y.isEmpty) None else Some(sqrt(n.toDouble(y.get)))
 
 }
