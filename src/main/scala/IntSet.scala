@@ -38,45 +38,18 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
     else {
       if (x < elem) new NonEmptySet(elem, left.excl(x), right)
       else if (x > elem) new NonEmptySet(elem, left, right.excl(x))
-      else {
-        if (left.isEmpty && right.isEmpty) new EmptySet
-        else if (left.isEmpty) right
-        else if (right.isEmpty) left
-        else {
-          val max = left.asInstanceOf[NonEmptySet].findMax
-          new NonEmptySet(max, left.excl(max), right)
-        }
-      }
+      else left.union(right)
     }
-
-  private def getElem = elem
-  private def getLeft = left
-  private def getRight = right
-
-  @tailrec
-  private def findMax: Int =
-    if (right.isEmpty) elem
-    else right.asInstanceOf[NonEmptySet].findMax
-
 
   def union(x: IntSet): IntSet = x match {
     case _: EmptySet => this
-    case nonEmptySet: NonEmptySet => {
-      val incl = this.incl(nonEmptySet.getElem)
-
-      if (nonEmptySet.getLeft.isEmpty && nonEmptySet.getRight.isEmpty) incl
-      else if (nonEmptySet.getLeft.isEmpty) incl.union(nonEmptySet.getRight)
-      else if (nonEmptySet.getRight.isEmpty) incl.union(nonEmptySet.getLeft)
-      else incl.union(nonEmptySet.getLeft).union(nonEmptySet.getRight)
-    }
+    case _: NonEmptySet => left.union(x).union(right).incl(elem)
   }
 
-  def intersect(x: IntSet): IntSet = x match {
-    case x : EmptySet => x
-    case x : NonEmptySet =>
-      if (x.contains(elem)) new NonEmptySet(elem, left.intersect(x), right.intersect(x))
-      else (new EmptySet).union(left.intersect(x)).union(right.intersect(x))
-    }
+  def intersect(x: IntSet): IntSet =
+    if (x.isEmpty) x
+    else if (x.contains(elem)) new NonEmptySet(elem, left.intersect(x), right.intersect(x))
+    else (new EmptySet).union(left.intersect(x)).union(right.intersect(x))
 
   override def toString: String = {
     left.toString
