@@ -7,18 +7,18 @@ class SquareListTest extends FunSuite{
   val empty = List()
 
   test("squareList(empty) will return empty"){
-    assert(SquareList.squareList(empty).sameElements(empty))
+    assertResult(empty)(SquareList.squareList(empty))
   }
 
   test("squareListCase(empty) will return empty"){
-    assert(SquareList.squareListCase(empty).sameElements(empty))
+    assertResult(empty)(SquareList.squareListCase(empty))
   }
 
   test("squareList(init) will return result"){
-    assert(SquareList.squareList(init).sameElements(result))
+    assertResult(result)(SquareList.squareList(init))
   }
 
   test("squareListCase(init) will return result"){
-    assert(SquareList.squareListCase(init).sameElements(result))
+    assertResult(result)(SquareList.squareListCase(init))
   }
 }

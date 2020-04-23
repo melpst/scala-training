@@ -7,7 +7,7 @@ class FilterTest extends FunSuite{
     val list = Array(1,2,3).toList
     val map = Map[Int, Double](4->3,5->5,6->10)
 
-    assert(Filter.res(list,map).sameElements(List()))
+    assertResult(List())(Filter.res(list,map))
   }
 
   test("some list is in map will return some multiply"){
@@ -15,7 +15,7 @@ class FilterTest extends FunSuite{
     val list = Array(1,2,3).toList
     val map = Map[Int, Double](1->3,3->5,6->10)
 
-    assert(Filter.res(list,map).sameElements(List(3,15)))
+    assertResult(List(3,15))(Filter.res(list,map))
   }
 
 
@@ -24,6 +24,6 @@ class FilterTest extends FunSuite{
     val list = Array(1,2,3).toList
     val map = Map[Int, Double](1->3,2->5,3->10,4->20)
 
-    assert(Filter.res(list,map).sameElements(List(3,10,30)))
+    assertResult(List(3,10,30))(Filter.res(list,map))
   }
 }

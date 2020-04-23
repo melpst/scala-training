@@ -12,14 +12,14 @@ class ListTest extends FunSuite{
   val allEmptySet = Set[Char]()
 
   test("listOfStringToChar(strArr) will return strSet"){
-    assert(ListObject.listOfStringToChar(strArr)===strSet)
+    assertResult(strSet)(ListObject.listOfStringToChar(strArr))
   }
 
   test("listOfStringToChar(someEmptyArr) will return someEmptySet"){
-    assert(ListObject.listOfStringToChar(someEmptyArr)===someEmptySet)
+    assertResult(someEmptySet)(ListObject.listOfStringToChar(someEmptyArr))
   }
 
   test("listOfStringToChar(allEmptyArr) will return allEmptySet"){
-    assert(ListObject.listOfStringToChar(allEmptyArr)===allEmptySet)
+    assertResult(allEmptySet)(ListObject.listOfStringToChar(allEmptyArr))
   }
 }

@@ -3,7 +3,7 @@ import DoubleComparator._
 
 class DoubleComparatorTest extends FunSuite{
   test("abs(x-y) > 0.5(default) will be false"){
-    assert((1 ~= 2) ===false)
+    assert((1 ~= 2)===false)
   }
 
   test("abs(x-y) = 0.5(default) will be true"){
