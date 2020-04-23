@@ -3,9 +3,11 @@ import org.scalatest.FunSuite
 class ReverseQueueTest extends FunSuite{
 
   test("q.put(hello) will return Array(olleh)"){
+
+    val word = "hello"
     val q = new ReverseQueue(1)
-    q.put("hello")
-    assertResult("olleh")(q.get().getOrElse(None))
+    q.put(word)
+    assertResult(word.reverse)(q.get().getOrElse(None))
   }
 
 }
