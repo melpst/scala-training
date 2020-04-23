@@ -6,9 +6,10 @@ object StringMethods {
 
   def mostCommonWord(str: String): String = toLower(str).maxBy(s => toLower(str).count(a => a.equals(s)))
 
-  def mostCommonLetter(str: String): Char =
-    toLower(str).map(s => s.toList).flatten
-    .maxBy(c => toLower(str).map(s => s.toList).flatten.count(l => l.equals(c)))
+  def mostCommonLetter(str: String): Option[Char] =
+    if (str.isEmpty) None
+    else Some(toLower(str).map(s => s.toList).flatten
+    .maxBy(c => toLower(str).map(s => s.toList).flatten.count(l => l.equals(c))))
 
   def mapCharToWords(str: String): Map[Char, Array[String]] =
     toLower(str).map(s => s.toList.map(c => (c, s))).flatten.groupBy(t => t._1)
