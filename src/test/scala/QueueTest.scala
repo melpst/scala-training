@@ -1,6 +1,4 @@
-import org.scalatest._
-
-import scala.collection.mutable.ArrayBuffer
+import org.scalatest.FunSuite
 
 class QueueTest extends FunSuite{
 

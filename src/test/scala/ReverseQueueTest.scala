@@ -1,5 +1,4 @@
 import org.scalatest.FunSuite
-import scala.collection.mutable.ArrayBuffer
 
 class ReverseQueueTest extends FunSuite{
 
