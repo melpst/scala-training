@@ -16,23 +16,23 @@ class MedianTest extends FunSuite{
   val m = new Median
 
   test("median(intOddSeq) will return medOdd"){
-    assertResult(medOdd)(m.medianInt(intOddSeq).get)
+    assertResult(medOdd)(m.median(intOddSeq))
   }
 
   test("median(intEvenSeq) will return medEven"){
-    assertResult(medEven)(m.medianInt(intEvenSeq).get)
+    assertResult(medEven)(m.median(intEvenSeq))
   }
 
   test("median(doubleOddSeq) will return medOdd"){
-    assertResult(medOdd)(m.medianDouble(doubleOddSeq).get)
+    assertResult(medOdd)(m.median(doubleOddSeq))
   }
 
   test("median(doubleEvenSeq) will return medEven"){
-    assertResult(medEven)(m.medianDouble(doubleEvenSeq).get)
+    assertResult(medEven)(m.median(doubleEvenSeq))
   }
 
-  test("median(emptySeq) will return None"){
-    assertResult(None)(m.medianDouble(emptySeq))
+  test("median(emptySeq) will return NaN"){
+    assert(m.median(emptySeq).equals(Double.NaN))
   }
 
 }

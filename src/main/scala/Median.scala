@@ -1,20 +1,20 @@
 class Median{
 
-  def calcMedian(s: Seq[Double], mid: Int): Double =
-    (s.apply(mid-1)+s.apply(mid))/2
+  def calcMedian[T:Numeric](s: Seq[T])(implicit n: Numeric[T]): Double = n match {
+    case n: Integral[_] => import n._; toDouble(s.sum) / toDouble(fromInt(s.size))
+    case n: Fractional[_] => import n._; toDouble(s.sum) / toDouble(fromInt(s.size))
+    case _ => sys.error("not a Seq of Integral, Fractional")
+  }
 
-  def medianInt(s: Seq[Int]): Option[Double] =
-    medianDouble(s.map(x => x.toDouble))
+  def median[T:Numeric](s: Seq[T]): Double = {
+    val sorted = s.sorted
+    val mid: Int = s.length / 2
 
-  def medianDouble(s:Seq[Double]):Option[Double] =
-    if(s.isEmpty) None
-    else {
-      val sorted = s.sorted
-      val mid: Int = s.length / 2
-
-      sorted.length % 2 match {
-        case 0 => Some(calcMedian(sorted, mid))
-        case _ => Some(sorted.apply(mid))
-      }
+    sorted.length % 2 match {
+      case 0 => calcMedian(sorted.slice(mid-1, mid+1))
+      case _ => Numeric[T].toDouble(sorted.apply(mid))
     }
+  }
+
+
 }
