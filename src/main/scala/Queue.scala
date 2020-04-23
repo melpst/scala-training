@@ -1,19 +1,24 @@
-import scala.collection.mutable.ArrayBuffer
+class Queue(n: Int) extends QueueGeneric {
+  private var arr = new Array[String](n)
+  private var head = 0
+  private var tail = 0
 
-class Queue extends QueueGeneric {
-  private var arr = ArrayBuffer.empty[String]
+  def isEmpty(): Boolean = head==tail==0
 
-  def isEmpty(): Boolean = arr.isEmpty
-
-  def sameElements(array: ArrayBuffer[String]): Boolean = arr.sameElements(array)
-
-  def put(str: String): ArrayBuffer[String] = {
-    arr.addOne(str)
+  override def put(t: String): Boolean = {
+    if(tail<arr.length) {
+      arr(tail) = t
+      tail += 1
+      true
+    }
+    else false
   }
 
-  def get(): Option[String] = {
-    if(!arr.isEmpty) {
-      Some(arr.remove(0))
+  override def get(): Option[String] = {
+    if(head<tail) {
+      val h = arr(head)
+      head += 1
+      Some(h)
     }
     else None
   }

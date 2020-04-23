@@ -1,1 +1,1 @@
-class ReverseQueue extends Queue with ReverseQueueGeneric
+class ReverseQueue(n: Int) extends Queue(n: Int) with ReverseQueueGeneric

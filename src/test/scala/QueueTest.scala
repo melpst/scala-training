@@ -3,33 +3,41 @@ import org.scalatest._
 import scala.collection.mutable.ArrayBuffer
 
 class QueueTest extends FunSuite{
-  val q = new Queue
 
-  test("q.put(hello) will return Array(hello)"){
-    assert(q.put("hello").sameElements(ArrayBuffer("hello")))
+  test("q.put(hello) will return true"){
+    val q = new Queue(1)
+    assert(q.put("hello")==true)
   }
 
-  test("q.put(world) will return Array(hello, world)"){
-    assert(q.put("world").sameElements(ArrayBuffer("hello", "world")))
+  test("q.put(world) after put(hello) will still return true"){
+    val q = new Queue(2)
+    q.put("hello")
+    assert(q.put("world")==true)
+  }
+
+  test("q.put(world) after put(good) and put(afternoon) will return false (out of bound)"){
+    val q = new Queue(2)
+    q.put("good")
+    q.put("afternoon")
+    assert(q.put("world")==false)
   }
 
   test("q.get() will return hello"){
-    assert(q.get().getOrElse(None)==="hello")
+    val q = new Queue(1)
+    q.put("hello")
+    assert(q.get().getOrElse(None)=="hello")
   }
 
-  test("q.arr must be equal to Array(world)"){
-    assert(q.sameElements(ArrayBuffer("world")))
+  test("q.get() at second time will return world"){
+    val q = new Queue(2)
+    q.put("hello")
+    q.put("world")
+    q.get()
+    assert(q.get().getOrElse(None)=="world")
   }
 
-  test("q.get() will return world"){
-    assert(q.get().getOrElse(None)==="world")
-  }
-
-  test("q.arr must be empty"){
-    assert(q.isEmpty)
-  }
-
-  test("q.get() will return none"){
+  test("q.get() from empty queue will get None"){
+    val q = new Queue(1)
     assert(q.get().getOrElse(None)===None)
   }
 }

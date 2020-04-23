@@ -1,6 +1,4 @@
-import scala.collection.mutable.ArrayBuffer
-
 trait QueueGeneric {
-  def put(str: String): ArrayBuffer[String]
+  def put(str: String): Boolean
   def get(): Option[String]
 }
