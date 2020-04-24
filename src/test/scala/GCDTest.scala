@@ -27,14 +27,14 @@ class GCDTest extends FunSuite{
   }
 
   test("gcd(x,y) iff x,y<0 and abs(x), abs(y) are prime number return -1"){
-    assertResult(-1)(GCD.gcd(-5,-3))
+    assertResult(1)(GCD.gcd(-5,-3))
   }
 
   test("gcd(x,y) iff x%y==0 and x>=y and x,y<0 return x"){
-    assertResult(-2)(GCD.gcd(-2,-4))
+    assertResult(2)(GCD.gcd(-2,-4))
   }
 
   test("gcd(x,y) iff x%y==0 and x<y and x,y<0 return y"){
-    assertResult(-2)(GCD.gcd(-4,-2))
+    assertResult(2)(GCD.gcd(-4,-2))
   }
 }
