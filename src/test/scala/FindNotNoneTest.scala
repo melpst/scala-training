@@ -11,11 +11,11 @@ class FindNotNoneTest extends FunSuite{
   val notNoneList = List[Option[Any]](x,y,z)
 
   test("firstNotNone(x,y,z) will return y"){
-    assertResult(y.get)(firstNotNone(x,y,z))
+    assertResult(y)(firstNotNone(x,y,z))
   }
 
   test("firstNotNone(x,x,z) will return z"){
-    assertResult(z.get)(firstNotNone(x,x,z))
+    assertResult(z)(firstNotNone(x,x,z))
   }
 
   test("firstNotNone(x,x,x) will return None"){
