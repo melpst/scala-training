@@ -1,5 +1,5 @@
 object ListObject {
 
-  def listOfStringToChar(arr: Array[String]) : Set[Char] = arr.map(s => s.toList).flatten.toSet
+  def listOfStringToChar(arr: Array[String]) : List[Char] = arr.map(s => s.toList).flatten.distinct.toList
 
 }
