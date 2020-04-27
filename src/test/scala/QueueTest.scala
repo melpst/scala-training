@@ -2,8 +2,50 @@ import org.scalatest.FunSuite
 
 class QueueTest extends FunSuite{
 
-  test("q.get() from empty queue will get None"){
+  test("q.isEmpty() on queue that cap = 0 will return true"){
     val q = new Queue(0)
+    assert(q.isEmpty()===true)
+  }
+
+  test("q.isFull() on queue that cap = 0 will return false"){
+    val q = new Queue(0)
+    assert(q.isFull()===true)
+  }
+
+  test("q.isEmpty() on empty queue will return true"){
+    val q = new Queue(1)
+    assert(q.isEmpty()===true)
+  }
+
+  test("q.isFull() on empty queue will return false"){
+    val q = new Queue(1)
+    assert(q.isFull()===false)
+  }
+
+  test("q.isEmpty() on full queue will return false"){
+    val q = new Queue(1)
+    assert(q.put("hello")===true)
+    assert(q.isEmpty()===false)
+  }
+
+  test("q.isFull() on full queue will return true"){
+    val q = new Queue(1)
+    assert(q.put("hello")===true)
+    assert(q.isFull()===true)
+  }
+
+  test("q.put(hello) to queue that cap = 0 will return false"){
+    val q = new Queue(0)
+    assert(q.put("hello")===false)
+  }
+
+  test("q.get() from queue that cap = 0 will get None"){
+    val q = new Queue(0)
+    assert(q.get()===None)
+  }
+
+  test("q.get() from empty queue will get None"){
+    val q = new Queue(1)
     assert(q.get()===None)
   }
 

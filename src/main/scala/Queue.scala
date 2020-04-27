@@ -3,8 +3,8 @@ class Queue(cap: Int) extends QueueGeneric {
   private var head = 0
   private var tail = 0
 
-  def isEmpty(): Boolean = arr.isEmpty
-  def isFull(): Boolean = (tail-head)%cap == 0 && head!=tail
+  def isEmpty(): Boolean = head == tail
+  def isFull(): Boolean = cap==0 || ((tail-head)%cap == 0 && head!=tail)
 
   override def put(t: String): Boolean = {
     if(isFull()) false
@@ -16,7 +16,7 @@ class Queue(cap: Int) extends QueueGeneric {
   }
 
   override def get(): Option[String] = {
-    if(head==tail) None
+    if(isEmpty()) None
     else{
       val h = arr(head%cap)
       head += 1
