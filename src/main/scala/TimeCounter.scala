@@ -1,15 +1,15 @@
-object TimeCounter {
-  def time[T](f: => T): T = {
+object TimeCounter extends App {
+
+  implicit val printer = Printer(println)
+
+  def timeit[T](f: => T)(implicit printer: Printer): T = {
     val start = System.currentTimeMillis
     val res = f
-    val exeTime = System.currentTimeMillis - start
-    println(exeTime + " ns")
+    val executeTime = System.currentTimeMillis - start
+    printer.fn(s"Scope execution time ${executeTime.toString} ns")
     res
   }
-//
-//  def plus(x:Int, y:Int): Int = x+y
-//
-//  println("hello "+time(List.range(1,100).sum))
-//
-//  println("world "+time(plus(200000000,230000000)))
+
 }
+
+case class Printer(fn: (String) => Unit)

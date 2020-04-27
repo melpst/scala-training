@@ -1,4 +1,5 @@
 import org.scalatest._
+import StringMethods._
 
 class StringMethodsTest extends FunSuite{
 
@@ -51,53 +52,53 @@ class StringMethodsTest extends FunSuite{
   val emptyMap = Map[Char, Array[String]]()
 
   test("mostLongestWord(str) will return Longest Word"){
-    assertResult(LongestWord)(StringMethods.longestWord(str))
+    assertResult(LongestWord)(str.longestWord)
   }
 
   test("mostCommonWord(str) will return most Common Word"){
-    assertResult(mostCommonWord)(StringMethods.mostCommonWord(str))
+    assertResult(mostCommonWord)(str.mostCommonWord)
   }
 
   test("mostCommonLetter(str) will return most Common Letter"){
-    assertResult(mostCommonLetter)(StringMethods.mostCommonLetter(str).getOrElse(None))
+    assertResult(mostCommonLetter)(str.mostCommonLetter.getOrElse(None))
   }
 
   test("mapCharToWords(str) will return map"){
-    val result = StringMethods.mapCharToWords(str)
+    val result = str.mapCharToWords
     assert(result.forall(a => map.contains(a._1) && map(a._1).sorted.sameElements(a._2.sorted)) ===true)
   }
 
   test("mostLongestWord(dupWords) will return longestDupWord"){
-    assertResult(longestDupWord)(StringMethods.longestWord(dupWords))
+    assertResult(longestDupWord)(dupWords.longestWord)
   }
 
   test("mostCommonWord(dupWords) will return most Common Word"){
-    assertResult(mostDupWord)(StringMethods.mostCommonWord(dupWords))
+    assertResult(mostDupWord)(dupWords.mostCommonWord)
   }
 
   test("mostCommonLetter(dupWords) will return most Common Letter"){
-    assertResult(mostDupLetter)(StringMethods.mostCommonLetter(dupWords).getOrElse(None))
+    assertResult(mostDupLetter)(dupWords.mostCommonLetter.getOrElse(None))
   }
 
   test("mapCharToWords(dupWords) will return map"){
-    val result = StringMethods.mapCharToWords(dupWords)
+    val result = dupWords.mapCharToWords
     assert(result.forall(a => dupMap.contains(a._1) && dupMap(a._1).sorted.sameElements(a._2.sorted)) ===true)
   }
 
   test("mostLongestWord(emptyStr) will return longestEmpty"){
-    assertResult(longestEmpty)(StringMethods.longestWord(emptyStr))
+    assertResult(longestEmpty)(emptyStr.longestWord)
   }
 
   test("mostCommonWord(emptyStr) will return most Common Word"){
-    assertResult(mostCommonWordEmpty)(StringMethods.mostCommonWord(emptyStr))
+    assertResult(mostCommonWordEmpty)(emptyStr.mostCommonWord)
   }
 
   test("mostCommonLetter(emptyStr) will return most Common Letter"){
-    assertResult(mostCommonLetterEmpty)(StringMethods.mostCommonLetter(emptyStr).getOrElse(None))
+    assertResult(mostCommonLetterEmpty)(emptyStr.mostCommonLetter.getOrElse(None))
   }
 
   test("mapCharToWords(emptyStr) will return emptyMap"){
-    val result = StringMethods.mapCharToWords(emptyStr)
+    val result = emptyStr.mapCharToWords
     assert(result.forall(a => emptyMap.contains(a._1) && emptyMap(a._1).sorted.sameElements(a._2.sorted)) ===true)
   }
 }
