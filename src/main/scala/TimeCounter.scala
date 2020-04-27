@@ -4,12 +4,8 @@ object TimeCounter extends App {
     val start = System.currentTimeMillis
     val res = f
     val executeTime = System.currentTimeMillis - start
-    printer(executeTime.toString)
+    printer(s"Scope execution time ${executeTime.toString} ns")
     res
   }
-
-//  def plus(x:Int, y:Int): Int = x+y
-//
-//  println("hello "+timeit(List.range(1,100).sum))
 
 }
