@@ -108,18 +108,6 @@ class QueueTest extends FunSuite{
     assert(q.put("!")===true)
     assert(q.get()===Some("world"))
     assert(q.get()===Some("!"))
-  }
-
-  test("another another another test case"){
-    val q = new Queue(2)
-    assert(q.put("good")===true)
-    assert(q.put("afternoon")===true)
-    assert(q.get()===Some("good"))
-    assert(q.put("world")===true)
-    assert(q.get()===Some("afternoon"))
-    assert(q.put("!")===true)
-    assert(q.get()===Some("world"))
-    assert(q.get()===Some("!"))
     assert(q.get()===None)
     assert(q.get()===None)
     assert(q.put("good")===true)
