@@ -1,22 +1,24 @@
-class Queue(n: Int) extends QueueGeneric {
-  private var arr = new Array[String](n)
+class Queue(cap: Int) extends QueueGeneric {
+  private var arr = new Array[String](cap)
   private var head = 0
   private var tail = 0
 
   def isEmpty(): Boolean = arr.isEmpty
 
   override def put(t: String): Boolean = {
-    if (head == tail){
-      arr = new Array[String](n)
-      head = 0
-      tail = 0
-      arr(tail) = t
-      tail +=1
-      true
-    }
-    else if(tail<arr.length) {
+    if(tail<cap) {
       arr(tail) = t
       tail += 1
+      true
+    }
+    else if (tail==cap && head > 0) {
+      val tmp = arr.slice(head,tail)
+      arr = tmp ++ new Array[String](head)
+      tail -= head
+      head = 0
+
+      arr(tail) = t
+      tail +=1
       true
     }
     else false
