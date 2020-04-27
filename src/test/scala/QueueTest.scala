@@ -46,12 +46,6 @@ class QueueTest extends FunSuite{
   }
 
 
-  test("q.put(world) after get() after put(hello) will return true®"){
-    val q = new Queue(1)
-    q.put("hello")
-    q.get()
-    assertResult(true)(q.put("world"))
-  }
 
   test("another test case"){
     val q = new Queue(2)
@@ -73,5 +67,13 @@ class QueueTest extends FunSuite{
     assert(q.put("!")==true)
     assert(q.get()==Some("world"))
     assert(q.get()==Some("!"))
+  }
+
+
+  test("q.put(world) after get() after put(hello) will return true®"){
+    val q = new Queue(1)
+    q.put("hello")
+    q.get()
+    assertResult(true)(q.put("world"))
   }
 }

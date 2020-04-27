@@ -6,30 +6,20 @@ class Queue(cap: Int) extends QueueGeneric {
   def isEmpty(): Boolean = arr.isEmpty
 
   override def put(t: String): Boolean = {
-    if(tail<cap) {
-      arr(tail) = t
+    if((tail-head)%cap != 0 || tail==head){
+      arr(tail%cap) = t
       tail += 1
-      true
-    }
-    else if (tail==cap && head > 0) {
-      val tmp = arr.slice(head,tail)
-      arr = tmp ++ new Array[String](head)
-      tail -= head
-      head = 0
-
-      arr(tail) = t
-      tail +=1
       true
     }
     else false
   }
 
   override def get(): Option[String] = {
-    if(head<tail) {
-      val h = arr(head)
+    if(head==tail) None
+    else{
+      val h = arr(head%cap)
       head += 1
       Some(h)
     }
-    else None
   }
 }
