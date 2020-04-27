@@ -11,27 +11,27 @@ class FindNotNoneTest extends FunSuite{
   val notNoneList = List[Option[Any]](x,y,z)
 
   test("firstNotNone(x,y,z) will return y"){
-    assertResult(y)(firstNotNone(x,y,z))
+    assertResult(y.get)(firstNotNone(x,y,z))
   }
 
   test("firstNotNone(x,x,z) will return z"){
-    assertResult(z)(firstNotNone(x,x,z))
+    assertResult(z.get)(firstNotNone(x,x,z))
   }
 
-  test("firstNotNone(x,x,x) will return x"){
-    assertResult(x)(firstNotNone(x,x,x))
+  test("firstNotNone(x,x,x) will return None"){
+    assertResult(None)(firstNotNone(x,x,x))
   }
 
-  test("productFromFirstNotNone(x,y,z) will return y.get"){
-    assertResult(y.get)(productFromFirstNotNone(x,y,z))
+  test("productIfNotNone(y,y,z) will return y*y*z"){
+    assertResult(Some(y.get*y.get*z.get))(productIfNotNone(y,y,z))
   }
 
-  test("productFromFirstNotNone(x,x,z) will return z.get"){
-    assertResult(z.get)(productFromFirstNotNone(x,x,z))
+  test("productIfNotNone(y,y,y) will return y*y*y"){
+    assertResult(Some(y.get*y.get*y.get))(productIfNotNone(y,y,y))
   }
 
-  test("productFromFirstNotNone(x,x,x) will return x.get"){
-    assertResult(x)(productFromFirstNotNone(x,x,x))
+  test("productFromFirstNotNone(x,y,z) will return None"){
+    assertResult(None)(productIfNotNone(x,y,z))
   }
 
   test("firstItemInListThatNotNone(noneList) will return None"){
