@@ -4,14 +4,15 @@ class Queue(cap: Int) extends QueueGeneric {
   private var tail = 0
 
   def isEmpty(): Boolean = arr.isEmpty
+  def isFull(): Boolean = (tail-head)%cap == 0 && head!=tail
 
   override def put(t: String): Boolean = {
-    if((tail-head)%cap != 0 || tail==head){
+    if(isFull()) false
+    else{
       arr(tail%cap) = t
       tail += 1
       true
     }
-    else false
   }
 
   override def get(): Option[String] = {

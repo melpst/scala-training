@@ -2,78 +2,98 @@ import org.scalatest.FunSuite
 
 class QueueTest extends FunSuite{
 
+  test("q.get() from empty queue will get None"){
+    val q = new Queue(0)
+    assert(q.get()===None)
+  }
+
   test("q.put(hello) will return true"){
     val q = new Queue(1)
-    assert(q.put("hello")==true)
+    assert(q.put("hello")===true)
   }
 
   test("q.put(world) after put(hello) will still return true"){
     val q = new Queue(2)
-    q.put("hello")
-    assert(q.put("world")==true)
+    assert(q.put("hello")===true)
+    assert(q.put("world")===true)
   }
 
   test("q.put(world) after put(good) and put(afternoon) will return false (out of bound)"){
     val q = new Queue(2)
-    q.put("good")
-    q.put("afternoon")
-    assert(q.put("world")==false)
+    assert(q.put("good")===true)
+    assert(q.put("afternoon")===true)
+    assert(q.put("world")===false)
   }
 
   test("q.get() will return hello"){
     val q = new Queue(1)
-    q.put("hello")
-    assert(q.get().getOrElse(None)=="hello")
+    assert(q.put("hello")===true)
+    assert(q.get()===Some("hello"))
   }
 
   test("q.get() at second time will return world"){
     val q = new Queue(2)
-    q.put("hello")
-    q.put("world")
-    q.get()
-    assert(q.get().getOrElse(None)=="world")
+    assert(q.put("hello")===true)
+    assert(q.put("world")===true)
+    assert(q.get()===Some("hello"))
+    assert(q.get()===Some("world"))
   }
 
-  test("q.get() from empty queue will get None"){
+  test("q.put(world) after get() after put(hello) will return true®"){
     val q = new Queue(1)
-    assert(q.get().getOrElse(None)===None)
+    assert(q.put("hello")===true)
+    assert(q.get()===Some("hello"))
+    assert(q.put("world")===true)
   }
-
-  test("q.put(world) after put(hello) will return false"){
-    val q = new Queue(1)
-    q.put("hello")
-    assertResult(false)(q.put("world"))
-  }
-
-
 
   test("another test case"){
     val q = new Queue(2)
-    q.put("good")
-    q.put("afternoon")
-    q.get()
-    assert(q.put("world")==true)
-    q.get()
-    q.put("!")
+    assert(q.put("good")===true)
+    assert(q.put("afternoon")===true)
+    assert(q.get()===Some("good"))
+    assert(q.put("world")===true)
+    assert(q.get()===Some("afternoon"))
+    assert(q.put("!")===true)
   }
 
   test("another another test case"){
     val q = new Queue(2)
-    q.put("good")
-    q.put("afternoon")
-    assert(q.get()==Some("good"))
-    assert(q.put("world")==true)
-    assert(q.get()==Some("afternoon"))
-    assert(q.put("!")==true)
-    assert(q.get()==Some("world"))
-    assert(q.get()==Some("!"))
+    assert(q.put("good")===true)
+    assert(q.put("afternoon")===true)
+    assert(q.get()===Some("good"))
+    assert(q.put("world")===true)
+    assert(q.get()===Some("afternoon"))
+    assert(q.put("!")===true)
+    assert(q.get()===Some("world"))
+    assert(q.get()===Some("!"))
+  }
+
+  test("another another another test case"){
+    val q = new Queue(2)
+    assert(q.put("good")===true)
+    assert(q.put("afternoon")===true)
+    assert(q.get()===Some("good"))
+    assert(q.put("world")===true)
+    assert(q.get()===Some("afternoon"))
+    assert(q.put("!")===true)
+    assert(q.get()===Some("world"))
+    assert(q.get()===Some("!"))
+    assert(q.get()===None)
+    assert(q.get()===None)
+    assert(q.put("good")===true)
+    assert(q.put("afternoon")===true)
+    assert(q.put("good")===false)
+    assert(q.put("afternoon")===false)
   }
 
 
-  test("q.put(world) after get() after put(hello) will return true®"){
-    val q = new Queue(1)
-    q.put("hello")
-    q.get()
-    assertResult(true)(q.put("world"))
+  test("push too many items to queue will return false"){
+    val q = new Queue(2)
+    assert(q.put("!")===true)
+    assert(q.put("!")===true)
+    assert(q.put("!")===false)
+    assert(q.put("!")===false)
+    assert(q.put("!")===false)
+    assert(q.put("!")===false)
   }
 }
